@@ -7,15 +7,15 @@ sns.set_context("paper")
 
 bert = {
     "datasets": [
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
     ],
     "accuracy": [49.10, 65.21, 58.30, 52.66, 69.50, 79.93, 69.19, 69.42, 79.93],
     "model": [
@@ -32,15 +32,15 @@ bert = {
 }
 roberta = {
     "datasets": [
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
     ],
     "accuracy": [54.46, 66.93, 74.35, 55.35, 68.55, 81.53, 67.51, 68.97, 81.53],
     "model": [
@@ -57,15 +57,15 @@ roberta = {
 }
 xlnet = {
     "datasets": [
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
     ],
     "accuracy": [53.77, 67.06, 68.08, 56.08, 70.09, 74.73, 66.57, 70.86, 74.73],
     "model": [
@@ -82,15 +82,15 @@ xlnet = {
 }
 bart = {
     "datasets": [
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
-        "SNLI Neg",
-        "MNLI Neg",
-        "RTE Neg",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
+        "SNLI$_{Neg}$",
+        "MNLI$_{Neg}$",
+        "RTE$_{Neg}$",
     ],
     "accuracy": [53.17, 66.60, 60.30, 52.57, 69.64, 77.33, 70.77, 70.26, 77.33],
     "model": [
@@ -142,4 +142,6 @@ for i in range(0, 2):
             sns.despine(left=True, bottom=True)
             ax[i, j].set_title(f"{model_name[i][j]}", fontsize=13)
 f.tight_layout()
+
+plt.rcParams.update({"text.usetex": True, "font.family": "Helvetica"})
 plt.savefig("results.pdf", format="pdf", dpi=1200)
