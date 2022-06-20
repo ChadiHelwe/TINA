@@ -1,0 +1,12 @@
+torch
+datasets
+transformers
+pandas
+scikit-learn
+tqdm
+sentencepiece
+numpy 
+requests 
+nlpaug
+statsmodels
+seaborn
