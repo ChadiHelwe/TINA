@@ -7,6 +7,8 @@ from tina.eval import evaluate_per_dataset, evaluate_per_negation_dataset
 from tina.finetune import finetune
 from tina.finetune_with_tina import finetune_with_tina
 from tina.finetune_with_tina_minus import finetune_with_tina_minus
+from tina.preprocessing.check_grammar_correct import check_grammar
+from tina.preprocessing.data_augmentation import data_augmentation
 
 PRETRAINED_MODEL = "bert-base-cased"
 TRAIN_DATASET_SIZE = 10
@@ -248,6 +250,8 @@ if __name__ == "__main__":
         "--split", help="Split 90/10 Training Dataset", action="store_true"
     )
     my_parser.add_argument("--device", help="Device", default="cpu", type=str)
+    my_parser.add_argument("--input", help="Input File", type=str)
+    my_parser.add_argument("--output", help="Output File", type=str)
 
     my_parser.add_argument(
         "--finetune", help="finetune experiments", action="store_true",
@@ -262,8 +266,17 @@ if __name__ == "__main__":
         help="finetune with TINA experiments",
         action="store_true",
     )
+    my_parser.add_argument("--check_grammar", help="Check Grammar", action="store_true")
     my_parser.add_argument(
-        "--finetune_all", help="auto all experiments", action="store_true",
+        "--data_augmentation", help="Data Augmentation", action="store_true"
+    )
+    my_parser.add_argument(
+        "--check_negation_dataset", help="Check Negation Dataset", action="store_true"
+    )
+    my_parser.add_argument(
+        "--reformat_negation_dataset",
+        help="Reformat Negation Dataset",
+        action="store_true",
     )
     try:
         args = my_parser.parse_args()
@@ -311,3 +324,10 @@ if __name__ == "__main__":
             args.runs,
             args.device,
         )
+    elif args.check_grammar:
+        check_grammar(args.input, args.output, args.device)
+    elif args.data_augmentation:
+        if args.task == "rte":
+            data_augmentation(args.input, args.output, True)
+        else:
+            data_augmentation(args.input, args.output, False)
