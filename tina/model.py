@@ -38,14 +38,6 @@ class T5(nn.Module):
         self.tokenizer = T5Tokenizer.from_pretrained(pretrained_t5_model)
 
     def forward(self, x, y=None):
-        """
-        If the label is not None, then return the model with the input and the label. Otherwise, return
-        the model with the input and the decoder_input_ids
-
-        :param x: a dictionary of input tensors
-        :param y: labels
-        :return: The model is being returned.
-        """
         if y is not None:
             return self.model(**x, labels=y)
         return self.model(**x, decoder_input_ids=x["input_ids"])
@@ -53,19 +45,6 @@ class T5(nn.Module):
     def predict_te(
         self, phrase_1: str, phrase_2: str, prompt: str, device: str = "cpu"
     ) -> str:
-        """
-        The function takes in two sentences, a prompt, and a device (cpu or gpu) and returns the prediction
-
-        :param phrase_1: The first sentence in the pair
-        :type phrase_1: str
-        :param phrase_2: The hypothesis or the second sentence in the pair
-        :type phrase_2: str
-        :param prompt: :param prompt: the prompt to use for the generation. Can be either "rte" or "snli"
-        :type prompt: str
-        :param device: str = "cpu", defaults to cpu
-        :type device: str (optional)
-        :return: The output of the model.
-        """
         with torch.no_grad():
             if prompt == "rte":
                 input_ids = self.tokenizer(
@@ -90,19 +69,6 @@ class T5(nn.Module):
     def predict_te_greedy(
         self, phrase_1: str, phrase_2: str, prompt: str, device: str = "cpu"
     ) -> str:
-        """
-        The function takes in two sentences, a prompt, and a device (cpu or gpu) and returns the prediction
-
-        :param phrase_1: The first sentence in the pair
-        :type phrase_1: str
-        :param phrase_2: The hypothesis or the premise
-        :type phrase_2: str
-        :param prompt: the prompt to use for the generation. Can be either "rte" or "snli"
-        :type prompt: str
-        :param device: The device to run the model on, defaults to cpu
-        :type device: str (optional)
-        :return: The output of the model.
-        """
         with torch.no_grad():
             if prompt == "rte":
                 input_ids = self.tokenizer(
@@ -139,20 +105,6 @@ class AutoModelTE(nn.Module):
     def predict_te(
         self, phrase_1: str, phrase_2: str, prompt: str, device: str = "cpu"
     ) -> str:
-        """
-        The function takes in two sentences, a prompt, and a device (cpu or gpu) and returns the prediction
-
-        :param phrase_1: The first sentence in the pair
-        :type phrase_1: str
-        :param phrase_2: The hypothesis or the premise
-        :type phrase_2: str
-        :param prompt: the prompt to use for the generation. Can be either "rte" or "snli"
-        :type prompt: str
-        :param device: The device to run the model on, defaults to cpu
-        :type device: str (optional)
-        :return: The output of the model.
-        """
-
         with torch.no_grad():
             inputs = self.tokenizer(
                 phrase_1, phrase_2, padding=True, return_tensors="pt"
@@ -167,20 +119,6 @@ class AutoModelTE(nn.Module):
     def predict(
         self, phrase_1: str, phrase_2: str, prompt: str, device: str = "cpu"
     ) -> str:
-        """
-        The function takes in two phrases, a prompt, and a device (cpu or gpu) and returns the predicted
-        output
-
-        :param phrase_1: The first phrase in the pair
-        :type phrase_1: str
-        :param phrase_2: The second phrase in the prompt
-        :type phrase_2: str
-        :param prompt: the prompt to use for the generation. Can be either "rte" or "snli"
-        :type prompt: str
-        :param device: str = "cpu", defaults to cpu
-        :type device: str (optional)
-        :return: The predicted output
-        """
         with torch.no_grad():
             inputs = self.tokenizer(
                 phrase_1, phrase_2, padding=True, return_tensors="pt"
