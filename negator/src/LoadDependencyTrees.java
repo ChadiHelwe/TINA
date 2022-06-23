@@ -27,10 +27,9 @@ import edu.stanford.nlp.trees.EnglishGrammaticalRelations;
 import edu.stanford.nlp.trees.GrammaticalRelation;
 import edu.stanford.nlp.trees.ud.CoNLLUDocumentReader;
 import edu.stanford.nlp.util.Quadruple;
-import javafx.util.Pair;
 
 public class LoadDependencyTrees {
-	static String rulesFile = "data/rules.json";
+	static String rulesFile = "negator/data/rules.json";
 	public static void writeToTSV(String fileName, List<String> data) throws IOException {
 		FileWriter fos  = new FileWriter(fileName);
 		PrintWriter dos = new PrintWriter(fos);
@@ -416,6 +415,6 @@ public class LoadDependencyTrees {
 
 	public static void main(String[] args) throws Exception {
 		// System.out.println("x");
-		LoadDependencyTrees.readTreesFromFile("data/examples_conllu.txt", "data/examples_negation.tsv");
+		LoadDependencyTrees.readTreesFromFile(args[0], args[1]);
 	}
 }

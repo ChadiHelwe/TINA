@@ -1,5 +1,7 @@
 import argparse
+import subprocess
 import sys
+from ast import arg
 
 import torch
 
@@ -13,14 +15,11 @@ from tina.preprocessing.reformat_negation_dataset import (
     check_negation_dataset,
     reformat_negation_dataset,
 )
+from tina.preprocessing.utils import extract_sentences
+from tina.utilities.convert_to_conllu import convert_to_conllu
 
-PRETRAINED_MODEL = "bert-base-cased"
 TRAIN_DATASET_SIZE = 10
 VAL_DATASET_SIZE = 10
-BATCH_SIZE = 32
-EPOCHS = 12
-LEARNING_RATE = 1e-4
-DEVICE = "cpu"
 
 
 def finetune_experiments(
@@ -57,10 +56,8 @@ def finetune_experiments(
         for exp_cnt in range(0, runs):
             torch.manual_seed(exp_cnt)
             print(f"Dataset {neg_dataset} Experiment {exp_cnt}")
-            name_best_model = (
-                f"best_finetuned_model_{pretrained_model}_{task}_{exp_cnt}".replace(
-                    "/", ""
-                )
+            name_best_model = f"best_finetuned_model_{pretrained_model}_{task}_{exp_cnt}".replace(
+                "/", ""
             )
             finetune(
                 pretrained_model,
@@ -91,7 +88,7 @@ def finetune_experiments(
                 pretrained_model=False,
             )
     except Exception as e:
-        print(e.args[0])
+        print(e.args[1])
 
 
 def finetune_with_tina_minus_experiments(
@@ -162,7 +159,7 @@ def finetune_with_tina_minus_experiments(
             )
 
     except Exception as e:
-        print(e.args[0])
+        print(e.args[1])
 
 
 def finetune_with_tina_experiments(
@@ -233,7 +230,7 @@ def finetune_with_tina_experiments(
             )
 
     except Exception as e:
-        print(e.args[0])
+        print(e.args[1])
 
 
 if __name__ == "__main__":
@@ -261,9 +258,7 @@ if __name__ == "__main__":
     my_parser.add_argument("--output", help="Output File", type=str)
 
     my_parser.add_argument(
-        "--finetune",
-        help="finetune experiments",
-        action="store_true",
+        "--finetune", help="finetune experiments", action="store_true",
     )
     my_parser.add_argument(
         "--finetune_with_tina_minus",
@@ -287,6 +282,14 @@ if __name__ == "__main__":
         help="Reformat Negation Dataset",
         action="store_true",
     )
+    my_parser.add_argument(
+        "--convert_to_conllu", help="Format to CONLL-U", action="store_true"
+    )
+    my_parser.add_argument("--negate", help="Negate Dataset", action="store_true")
+    my_parser.add_argument(
+        "--extract_sentences", help="Extract Sentences", action="store_true"
+    )
+
     try:
         args = my_parser.parse_args()
     except:
@@ -343,4 +346,19 @@ if __name__ == "__main__":
     elif args.check_negation_dataset:
         check_negation_dataset(args.input_1, args.input_2, args.output)
     elif args.reformat_negation_dataset:
-        reformat_negation_dataset(args.input_1, args.input_2, args.output)
+        reformat_negation_dataset(args.input_1, args.input_2, args.output, args.task)
+    elif args.convert_to_conllu:
+        convert_to_conllu(args.input_1, args.output)
+    elif args.negate:
+        subprocess.call(
+            [
+                "java",
+                "-jar",
+                "--enable-preview",
+                "negator.jar",
+                args.input_1,
+                args.output,
+            ]
+        )
+    elif args.extract_sentences:
+        extract_sentences(args.input_1, args.output)

@@ -53,8 +53,8 @@ def read_dataset_grammar(dataset_path):
     data = pd.read_csv(dataset_path)
     p = data.values[:, 0].tolist()
     h = data.values[:, 1].tolist()
-    n_p = data.values[:, 5].tolist()
-    n_h = data.values[:, 6].tolist()
+    n_p = data.values[:, 3].tolist()
+    n_h = data.values[:, 4].tolist()
     l = data.values[:, 2].tolist()
     return p, h, n_p, n_h, l
 
@@ -307,3 +307,12 @@ def sample_dataset(dataset_name, split, size=None):
         random_dataset_instances = sample(dataset_instances, size)
         return random_dataset_instances
     return dataset_instances
+
+
+def extract_sentences(dataset_path, output_file_name):
+    data = pd.read_csv(dataset_path)
+
+    with open(output_file_name, "w", encoding="utf-8") as f:
+        for i in data.values[:, :2]:
+            f.write(str(i[0]) + "\n")
+            f.write(str(i[1]) + "\n")

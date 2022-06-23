@@ -3,30 +3,32 @@ import csv
 import pandas as pd
 import spacy
 from nltk.tokenize import word_tokenize
+from sklearn import datasets
 from tqdm import tqdm
 
 
-def reformat_negation_dataset(path_negated_data, path_non_negated_data, output_data):
+def reformat_negation_dataset(
+    path_negated_data, path_non_negated_data, output_data, task
+):
     negated_data = pd.read_csv(
-        path_negated_data, sep="\t", encoding="cp1252", header=None
+        path_negated_data, sep="\t", encoding="utf-8", header=None
     )
     data = pd.read_csv(path_non_negated_data, encoding="utf-8")
 
     negated_data_iter = negated_data.iterrows()
     data = data.iterrows()
 
+    if task == "rte":
+        premise_key = "sentence1"
+        hypothesis_key = "sentence2"
+    else:
+        premise_key = "premise"
+        hypothesis = "hypothesis"
+
     with open(output_data, "w", newline="", encoding="utf-8") as f:
         out = csv.writer(f)
         out.writerow(
-            [
-                "Premise",
-                "Hypothesis",
-                "Label",
-                "Backtranslated Premise",
-                "Backtranslated Hypothesis",
-                "Negated Premise",
-                "Negated Hypothesis",
-            ]
+            ["Premise", "Hypothesis", "Label", "Negated Premise", "Negated Hypothesis",]
         )
         cnt = 0
         for (_, row), (_, neg_row1), (_, neg_row2) in zip(
@@ -40,11 +42,9 @@ def reformat_negation_dataset(path_negated_data, path_non_negated_data, output_d
             ):
                 out.writerow(
                     [
-                        row["Premise"],
-                        row["Hypothesis"],
-                        row["Label"],
-                        row["Backtranslated Premise"],
-                        row["Backtranslated Hypothesis"],
+                        row[premise_key],
+                        row[hypothesis_key],
+                        row["label"],
                         neg_row1[2],
                         neg_row2[2],
                     ]
@@ -64,19 +64,11 @@ def check_negation_dataset(path_training_data, path_testing_data, clean_dataset_
     with open(clean_dataset_name, "w", newline="", encoding="utf-8") as f:
         out = csv.writer(f)
         out.writerow(
-            [
-                "Premise",
-                "Hypothesis",
-                "Label",
-                "Backtranslated Premise",
-                "Backtranslated Hypothesis",
-                "Negated Premise",
-                "Negated Hypothesis",
-            ]
+            ["Premise", "Hypothesis", "Label", "Negated Premise", "Negated Hypothesis",]
         )
         for i in tqdm(training_data.values[:, :]):
-            training_neg_prem = set(word_tokenize(i[5]))
-            training_neg_hyp = set(word_tokenize(i[6]))
+            training_neg_prem = set(word_tokenize(i[3]))
+            training_neg_hyp = set(word_tokenize(i[4]))
             find_sim = False
             for j in testing_data.values[:, :]:
                 testing_neg_prem = set(word_tokenize(j[1]))
@@ -128,8 +120,6 @@ def check_negation_dataset(path_training_data, path_testing_data, clean_dataset_
                 )
 
                 if cosine_prem > 0.85 and cosine_hyp > 0.85:
-                    print(i[5], i[6])
-                    print(j[1], j[2])
                     find_sim = True
                     cnt_no_inst += 1
                     break

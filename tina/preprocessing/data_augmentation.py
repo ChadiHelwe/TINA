@@ -2,7 +2,12 @@ import csv
 
 import pandas as pd
 
-from tina.utils import LABEL_TO_ID_RTE, LABEL_TO_ID_SNLI_MNLI
+from tina.utils import (
+    ID_TO_LABEL_RTE,
+    ID_TO_LABEL_SNLI_MNLI,
+    LABEL_TO_ID_RTE,
+    LABEL_TO_ID_SNLI_MNLI,
+)
 
 
 def data_augmentation(path_dataset, path_new_dataset, rte_task):
@@ -20,7 +25,11 @@ def data_augmentation(path_dataset, path_new_dataset, rte_task):
             hypothesis = i["Hypothesis"]
             negated_premise = i["Negated Premise"]
             negated_hypothesis = i["Negated Hypothesis"]
-            label = i["Label"]
+
+            if rte_task:
+                label = ID_TO_LABEL_RTE[i["Label"]]
+            else:
+                label = ID_TO_LABEL_SNLI_MNLI[i["Label"]]
 
             if label == "entailment":
                 if rte_task:

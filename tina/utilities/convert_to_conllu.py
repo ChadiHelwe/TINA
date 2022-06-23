@@ -2,10 +2,6 @@ import stanza
 from stanza.utils.conll import CoNLL
 
 
-import stanza
-from stanza.utils.conll import CoNLL
-
-
 def read_in_chunks(file_object, chunk_size=1024):
     """Lazy function (generator) to read a file piece by piece.
     Default chunk size: 1k."""
@@ -16,11 +12,11 @@ def read_in_chunks(file_object, chunk_size=1024):
         yield data
 
 
-def convert_to_conllu(data, nb_instances=2):
+def convert_to_conllu(input_file, output_file, nb_instances=None):
     nlp = stanza.Pipeline("en", processors="tokenize,pos,lemma,depparse", use_gpu=True)
 
-    with open(f"{data}", "r") as in_f:
-        with open("examples_conllu.txt", "w") as out:
+    with open(input_file, "r") as in_f:
+        with open(output_file, "w") as out:
             cnt = 0
             for piece in read_in_chunks(in_f):
                 for i in piece:
@@ -40,13 +36,9 @@ def convert_to_conllu(data, nb_instances=2):
                         cnt += 1
                         if cnt % 1000 == 0:
                             print(cnt)
-                        if cnt >= nb_instances:
+                        if nb_instances is not None and cnt >= nb_instances:
                             break
                     except Exception as e:
                         print(e.args)
                 if nb_instances is not None and cnt >= nb_instances:
                     break
-
-
-if __name__ == "__main__":
-    convert_to_conllu("examples.txt", None)
