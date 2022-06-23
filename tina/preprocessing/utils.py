@@ -13,7 +13,7 @@ from tina.utils import ID_TO_LABEL_RTE, ID_TO_LABEL_SNLI_MNLI
 def read_jsonl(dataset_path):
     """
     It reads a jsonl file and returns a list of dictionaries
-    
+
     :param dataset_path: the path to the dataset file
     :return: A list of dictionaries.
     """
@@ -28,7 +28,7 @@ def extract_sentences(
     """
     The function takes in a json instance, and returns two sentences, one positive and one negative,
     with the object word replaced with the object word in the json instance
-    
+
     :param json_instance: the json instance
     :param pos_statmt_key: the key in the json file that contains the positive statement
     :param neg_statmt_key: the key in the json file that contains the negative statement
@@ -46,7 +46,7 @@ def read_dataset_grammar(dataset_path):
     """
     It reads the dataset and returns the lists of premises, hypotheses, negative premises, negative
     hypotheses, and labels
-    
+
     :param dataset_path: The path to the dataset file
     :return: the values of the columns in the dataset.
     """
@@ -62,7 +62,7 @@ def read_dataset_grammar(dataset_path):
 def read_dataset(dataset_path, size=None):
     """
     It reads a CSV file and returns the first two columns as lists
-    
+
     :param dataset_path: The path to the dataset
     :param size: The number of samples to read from the dataset
     :return: the first size number of values from the x and y lists.
@@ -78,7 +78,7 @@ def read_dataset(dataset_path, size=None):
 def read_dataset_te_negative_generation(dataset_path, size=None):
     """
     It reads the dataset and returns the premise, hypothesis and label
-    
+
     :param dataset_path: The path to the dataset
     :param size: the number of samples to be read from the dataset
     :return: the premise, hypothesis and label.
@@ -96,7 +96,7 @@ def read_dataset_te(dataset_path, size=None):
     """
     It reads the dataset and returns a list of dictionaries, where each dictionary contains the premise,
     hypothesis and label
-    
+
     :param dataset_path: The path to the dataset
     :param size: the number of examples to read from the dataset. If None, all examples are read
     :return: A list of dictionaries.
@@ -118,7 +118,7 @@ def read_dataset_te_negation_augmented(dataset_path, size=None):
     """
     It reads the dataset, and returns a list of dictionaries, where each dictionary contains the
     premise, hypothesis, and label
-    
+
     :param dataset_path: the path to the dataset file
     :param size: the number of examples to read from the dataset. If None, all examples are read
     :return: A list of dictionaries.
@@ -142,7 +142,7 @@ def read_dataset_te_negation_augmented_unlikelihood_loss(dataset_path, size=None
     """
     If the label is 2, then we don't add it to the list. If the label is 3 or 4, then we add it to the
     list with a label of 0 or 2 respectively
-    
+
     :param dataset_path: The path to the dataset
     :param size: the number of samples to read from the dataset. If None, all samples are read
     :return: A list of dictionaries.
@@ -267,7 +267,7 @@ def sample_dataset(dataset_name, split, size=None):
     """
     It takes in a dataset name and a split (train or val) and returns a list of tuples of the form
     (sentence, label)
-    
+
     :param dataset_name: The name of the dataset. Can be "rte", "mnli", or "snli"
     :param split: train or val
     :param size: the number of samples you want to take from the dataset

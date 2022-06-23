@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "negator/src"
+    ],
+    "java.project.outputPath": "negator/bin",
+    "java.project.referencedLibraries": [
+        "negator/lib/**/*.jar"
+    ]
+}

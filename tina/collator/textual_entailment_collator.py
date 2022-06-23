@@ -30,7 +30,7 @@ class T5TextualEntaillmentCollator:
     def __call__(self, batch):
         """
         It takes a batch of data, and returns a batch of data that is tokenized and padded
-        
+
         :param batch: a batch of data from the dataset
         :return: The input_ids of the labels
         """
@@ -71,7 +71,7 @@ class T5TextualEntaillmentUnlikelihoodLossCollator:
         """
         It takes a batch of data, tokenizes it, and returns the tokenized data, the labels, and the
         known/unknown labels.
-        
+
         :param batch: a list of dictionaries, each dictionary contains the premise, hypothesis, label,
         and known_label
         :return: The batch_x is a dictionary with keys: input_ids, attention_mask, token_type_ids.
@@ -134,7 +134,7 @@ class AutoTextualEntailmentCollator:
     def __call__(self, batch):
         """
         It takes a batch of data, and returns a batch of data that is tokenized and padded
-        
+
         :param batch: a batch of data from the dataset
         :return: The input_ids of the labels
         """
@@ -177,7 +177,7 @@ class AutoTextualEntailmentUnlikelihoodLossCollator:
         """
         It takes a batch of data, tokenizes it, and returns the tokenized data, the labels, and the
         known/unknown labels.
-        
+
         :param batch: a list of dictionaries, each dictionary contains the premise, hypothesis, label,
         and known_label
         :return: The batch_x is a dictionary with keys: input_ids, attention_mask, token_type_ids.

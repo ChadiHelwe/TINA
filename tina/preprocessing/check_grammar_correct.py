@@ -18,7 +18,11 @@ def check_grammar(input_file, output_file, device):
 
     dataset = GrammarDataset(input_file)
     collator = GrammarCollator()
-    dataloader = DataLoader(dataset, batch_size=32, collate_fn=collator,)
+    dataloader = DataLoader(
+        dataset,
+        batch_size=32,
+        collate_fn=collator,
+    )
 
     with open(output_file, "w", newline="", encoding="utf-8") as fl:
         out = csv.writer(fl)

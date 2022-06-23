@@ -57,8 +57,10 @@ def finetune_experiments(
         for exp_cnt in range(0, runs):
             torch.manual_seed(exp_cnt)
             print(f"Dataset {neg_dataset} Experiment {exp_cnt}")
-            name_best_model = f"best_finetuned_model_{pretrained_model}_{task}_{exp_cnt}".replace(
-                "/", ""
+            name_best_model = (
+                f"best_finetuned_model_{pretrained_model}_{task}_{exp_cnt}".replace(
+                    "/", ""
+                )
             )
             finetune(
                 pretrained_model,
@@ -259,7 +261,9 @@ if __name__ == "__main__":
     my_parser.add_argument("--output", help="Output File", type=str)
 
     my_parser.add_argument(
-        "--finetune", help="finetune experiments", action="store_true",
+        "--finetune",
+        help="finetune experiments",
+        action="store_true",
     )
     my_parser.add_argument(
         "--finetune_with_tina_minus",

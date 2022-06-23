@@ -41,7 +41,7 @@ class T5(nn.Module):
         """
         If the label is not None, then return the model with the input and the label. Otherwise, return
         the model with the input and the decoder_input_ids
-        
+
         :param x: a dictionary of input tensors
         :param y: labels
         :return: The model is being returned.
@@ -55,7 +55,7 @@ class T5(nn.Module):
     ) -> str:
         """
         The function takes in two sentences, a prompt, and a device (cpu or gpu) and returns the prediction
-        
+
         :param phrase_1: The first sentence in the pair
         :type phrase_1: str
         :param phrase_2: The hypothesis or the second sentence in the pair
@@ -92,7 +92,7 @@ class T5(nn.Module):
     ) -> str:
         """
         The function takes in two sentences, a prompt, and a device (cpu or gpu) and returns the prediction
-        
+
         :param phrase_1: The first sentence in the pair
         :type phrase_1: str
         :param phrase_2: The hypothesis or the premise
@@ -141,7 +141,7 @@ class AutoModelTE(nn.Module):
     ) -> str:
         """
         The function takes in two sentences, a prompt, and a device (cpu or gpu) and returns the prediction
-        
+
         :param phrase_1: The first sentence in the pair
         :type phrase_1: str
         :param phrase_2: The hypothesis or the premise
@@ -170,7 +170,7 @@ class AutoModelTE(nn.Module):
         """
         The function takes in two phrases, a prompt, and a device (cpu or gpu) and returns the predicted
         output
-        
+
         :param phrase_1: The first phrase in the pair
         :type phrase_1: str
         :param phrase_2: The second phrase in the prompt

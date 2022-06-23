@@ -12,7 +12,7 @@ class CrossEntropyAndUnlikelihoodLoss(nn.Module):
         """
         The function takes in the predicted values, the target values, the known labels, and the unknown
         labels. It then calculates the loss for each prediction and target pair
-        
+
         :param pred_values: the output of the model, a tensor of shape (batch_size, num_classes)
         :param target_values: the ground truth labels
         :param known_labels: a tensor of shape (batch_size, num_classes) where each element is either 0
@@ -42,7 +42,7 @@ class CrossEntropyAndUnlikelihoodLoss(nn.Module):
         """
         The function takes in the predicted values, the target values, the known labels, and the unknown
         labels, and returns the loss
-        
+
         :param pred_values: the output of the model, a tensor of shape (batch_size, num_classes)
         :param target_values: the ground truth labels
         :param known_labels: a tensor of shape (batch_size, num_classes) where each element is either 0

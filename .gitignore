@@ -133,3 +133,4 @@ dmypy.json
 *.tsv
 *.pdf
 *.pkl
+*.mod
