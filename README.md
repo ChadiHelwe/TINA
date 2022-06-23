@@ -52,12 +52,12 @@ python cli.py --finetune --model bert-base-cased  --task rte --learning_rate 1e-
 
 ## Finetuning Models with TINA Minus
 
-## Without Splitting 
+### Without Splitting 
 ```bash
 python cli.py --finetune_with_tina_minus --model bert-base-cased  --task rte --learning_rate 1e-4 --epochs 10 --weight_decay 0 --batch_size 8  --runs 2 --device cpu
 ```
 
-## With Splitting (Train/Val)
+### With Splitting (Train/Val)
 ```bash
 python cli.py --finetune_with_tina_minus --model bert-base-cased  --task rte --learning_rate 1e-4 --epochs 10 --weight_decay 0 --batch_size 8 --runs 2 --device cpu --split
 ```
