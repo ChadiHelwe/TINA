@@ -97,7 +97,7 @@ python cli.py --finetune_with_tina --model bert-base-cased  --task rte --learnin
 If you want to cite TINA, please refer to the publication in the [Findings of the Empirical Methods in Natural Language Processing](https://2022.emnlp.org/):
 
 ```code
-@inproceedings{helwe2022logitorch,
+@inproceedings{helwe2022tina,
   title={TINA: Textual Inference with Negation Augmentation},
   author={Helwe, Chadi and Coumes, Simon and Clavel, Chlo\'e and Suchanek, Fabian},
   booktitle={Findings of the Association for Computational Linguistics: EMNLP 2022},
