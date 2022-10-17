@@ -89,3 +89,21 @@ python cli.py --finetune_with_tina --model bert-base-cased  --task rte --learnin
 ```bash
 python cli.py --finetune_with_tina --model bert-base-cased  --task rte --learning_rate 1e-4 --epochs 10 --weight_decay 0 --batch_size 8 --runs 2 --device cpu --split
 ```
+
+
+## Citing
+
+If you want to cite TINA, please refer to the publication in the [Findings of the Empirical Methods in Natural Language Processing](https://2022.emnlp.org/):
+
+```code
+@inproceedings{helwe2022logitorch,
+  title={TINA: Textual Inference with Negation Augmentation},
+  author={Helwe, Chadi and Coumes, Simon and Clavel, Chlo\'e and Suchanek, Fabian},
+  booktitle={Findings of the Association for Computational Linguistics: EMNLP 2022},
+  year={2022}
+}
+```
+
+## Acknowledgments
+
+This work was partially funded by ANR-20-CHIA-0012-01 (“NoRDF”).
