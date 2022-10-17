@@ -28,7 +28,13 @@ def reformat_negation_dataset(
     with open(output_data, "w", newline="", encoding="utf-8") as f:
         out = csv.writer(f)
         out.writerow(
-            ["Premise", "Hypothesis", "Label", "Negated Premise", "Negated Hypothesis",]
+            [
+                "Premise",
+                "Hypothesis",
+                "Label",
+                "Negated Premise",
+                "Negated Hypothesis",
+            ]
         )
         cnt = 0
         for (_, row), (_, neg_row1), (_, neg_row2) in zip(
@@ -64,7 +70,13 @@ def check_negation_dataset(path_training_data, path_testing_data, clean_dataset_
     with open(clean_dataset_name, "w", newline="", encoding="utf-8") as f:
         out = csv.writer(f)
         out.writerow(
-            ["Premise", "Hypothesis", "Label", "Negated Premise", "Negated Hypothesis",]
+            [
+                "Premise",
+                "Hypothesis",
+                "Label",
+                "Negated Premise",
+                "Negated Hypothesis",
+            ]
         )
         for i in tqdm(training_data.values[:, :]):
             training_neg_prem = set(word_tokenize(i[3]))

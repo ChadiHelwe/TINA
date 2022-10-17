@@ -18,12 +18,22 @@ def check_grammar(input_file, output_file, device):
 
     dataset = GrammarDataset(input_file)
     collator = GrammarCollator()
-    dataloader = DataLoader(dataset, batch_size=32, collate_fn=collator,)
+    dataloader = DataLoader(
+        dataset,
+        batch_size=32,
+        collate_fn=collator,
+    )
 
     with open(output_file, "w", newline="", encoding="utf-8") as fl:
         out = csv.writer(fl)
         out.writerow(
-            ["Premise", "Hypothesis", "Label", "Negated Premise", "Negated Hypothesis",]
+            [
+                "Premise",
+                "Hypothesis",
+                "Label",
+                "Negated Premise",
+                "Negated Hypothesis",
+            ]
         )
         with torch.no_grad():
             for t_ps, t_hs, ps, hs, n_ps, n_hs, ls in tqdm(dataloader):

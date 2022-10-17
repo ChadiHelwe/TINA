@@ -65,7 +65,9 @@ def finetune_with_tina(
             collate_fn=textual_entailment_collator,
         )
         val_dataloader = DataLoader(
-            val_dataset, batch_size=batch_size, collate_fn=textual_entailment_collator,
+            val_dataset,
+            batch_size=batch_size,
+            collate_fn=textual_entailment_collator,
         )
     else:
         train_dataloader = DataLoader(
