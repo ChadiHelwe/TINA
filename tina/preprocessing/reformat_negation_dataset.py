@@ -23,7 +23,7 @@ def reformat_negation_dataset(
         hypothesis_key = "sentence2"
     else:
         premise_key = "premise"
-        hypothesis = "hypothesis"
+        hypothesis_key = "hypothesis"
 
     with open(output_data, "w", newline="", encoding="utf-8") as f:
         out = csv.writer(f)
